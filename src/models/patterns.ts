@@ -101,27 +101,87 @@ export const INTENT_PATTERNS: Record<IntentCategory, string[]> = {
 
 /**
  * Keywords that map to specific modes
+ * Enhanced for better search query detection
  */
 export const MODE_PATTERNS: Record<ModeId, string[]> = {
   news: [
-    'news', 'actualités', 'noticias', 'nachrichten',
-    'headlines', 'articles', 'titres', 'journal',
+    // English
+    'news', 'headlines', 'articles', 'breaking', 'latest news',
+    'current events', 'report', 'happening', 'today', 'update',
+    'what happened', 'crisis', 'conflict', 'election', 'politics',
+    // French
+    'actualités', 'nouvelles', 'titres', 'journal', 'info',
+    'dernières nouvelles', 'événements', 'rapport', 'politique',
+    // Spanish
+    'noticias', 'titulares', 'artículos', 'últimas noticias',
+    'actualidad', 'informe', 'política',
+    // German
+    'nachrichten', 'schlagzeilen', 'artikel', 'neuigkeiten',
+    'aktuell', 'bericht', 'politik',
   ],
   music: [
-    'music', 'musique', 'música', 'musik',
-    'songs', 'tracks', 'artists', 'chansons', 'artistes',
+    // English
+    'music', 'songs', 'tracks', 'artists', 'album', 'playlist',
+    'listen', 'play music', 'genre', 'band', 'singer',
+    // French
+    'musique', 'chansons', 'artistes', 'écouter', 'album',
+    'playlist', 'groupe', 'chanteur',
+    // Spanish
+    'música', 'canciones', 'artistas', 'escuchar', 'álbum',
+    'playlist', 'grupo', 'cantante',
+    // German
+    'musik', 'lieder', 'künstler', 'hören', 'album',
+    'playlist', 'band', 'sänger',
   ],
   weather: [
-    'weather', 'météo', 'tiempo', 'wetter',
-    'temperature', 'forecast', 'prévisions', 'clima',
+    // English
+    'weather', 'temperature', 'forecast', 'climate', 'rain',
+    'sunny', 'cloudy', 'snow', 'storm', 'humidity', 'wind',
+    'hot', 'cold', 'warm', 'degrees', 'celsius', 'fahrenheit',
+    // French
+    'météo', 'température', 'prévisions', 'climat', 'pluie',
+    'soleil', 'nuage', 'neige', 'orage', 'humidité', 'vent',
+    'chaud', 'froid', 'degrés',
+    // Spanish
+    'tiempo', 'temperatura', 'pronóstico', 'clima', 'lluvia',
+    'soleado', 'nublado', 'nieve', 'tormenta', 'humedad', 'viento',
+    'caliente', 'frío', 'grados',
+    // German
+    'wetter', 'temperatur', 'vorhersage', 'klima', 'regen',
+    'sonnig', 'bewölkt', 'schnee', 'sturm', 'feuchtigkeit', 'wind',
+    'heiß', 'kalt', 'grad',
   ],
   wiki: [
-    'wiki', 'wikipedia', 'encyclopedia', 'encyclopédie',
-    'knowledge', 'learn', 'savoir', 'apprendre',
+    // English
+    'wiki', 'wikipedia', 'encyclopedia', 'knowledge', 'learn',
+    'what is', 'who is', 'history of', 'about', 'definition',
+    'explain', 'meaning', 'information about', 'facts',
+    // French
+    'wiki', 'wikipédia', 'encyclopédie', 'savoir', 'apprendre',
+    'c\'est quoi', 'qui est', 'histoire de', 'à propos', 'définition',
+    'expliquer', 'signification', 'informations sur', 'faits',
+    // Spanish
+    'wiki', 'wikipedia', 'enciclopedia', 'conocimiento', 'aprender',
+    'qué es', 'quién es', 'historia de', 'sobre', 'definición',
+    'explicar', 'significado', 'información sobre', 'hechos',
+    // German
+    'wiki', 'wikipedia', 'enzyklopädie', 'wissen', 'lernen',
+    'was ist', 'wer ist', 'geschichte von', 'über', 'definition',
+    'erklären', 'bedeutung', 'informationen über', 'fakten',
   ],
   challenge: [
-    'challenge', 'défi', 'desafío', 'herausforderung',
-    'quiz', 'game', 'jeu', 'juego', 'spiel',
+    // English
+    'challenge', 'quiz', 'game', 'play game', 'start', 'begin',
+    'harder', 'easier', 'difficulty', 'score', 'leaderboard',
+    // French
+    'défi', 'quiz', 'jeu', 'jouer', 'commence', 'démarre',
+    'plus dur', 'plus facile', 'difficulté', 'score', 'classement',
+    // Spanish
+    'desafío', 'quiz', 'juego', 'jugar', 'comienza', 'empieza',
+    'más difícil', 'más fácil', 'dificultad', 'puntuación',
+    // German
+    'herausforderung', 'quiz', 'spiel', 'spielen', 'starte', 'beginne',
+    'schwieriger', 'einfacher', 'schwierigkeit', 'punktzahl',
   ],
 };
 
@@ -261,6 +321,47 @@ export const COUNTRY_MAPPINGS: Record<string, string> = {
 };
 
 // ============================================================================
+// TEMPORAL PATTERNS
+// ============================================================================
+
+/**
+ * Temporal expressions for time-based queries
+ */
+export const TEMPORAL_PATTERNS: Record<string, string[]> = {
+  today: [
+    'today', "aujourd'hui", 'hoy', 'heute',
+    'now', 'maintenant', 'ahora', 'jetzt',
+  ],
+  yesterday: [
+    'yesterday', 'hier', 'ayer', 'gestern',
+  ],
+  thisWeek: [
+    'this week', 'cette semaine', 'esta semana', 'diese woche',
+    'weekly', 'hebdomadaire', 'semanal', 'wöchentlich',
+  ],
+  thisMonth: [
+    'this month', 'ce mois', 'este mes', 'diesen monat',
+    'monthly', 'mensuel', 'mensual', 'monatlich',
+  ],
+  thisYear: [
+    'this year', 'cette année', 'este año', 'dieses jahr',
+    '2024', '2025', '2026',
+  ],
+  recent: [
+    'recent', 'latest', 'new', 'fresh',
+    'récent', 'dernier', 'nouveau', 'frais',
+    'reciente', 'último', 'nuevo', 'fresco',
+    'kürzlich', 'neueste', 'neu', 'frisch',
+  ],
+  past: [
+    'last', 'previous', 'past', 'former',
+    'dernier', 'précédent', 'passé', 'ancien',
+    'último', 'anterior', 'pasado', 'antiguo',
+    'letzter', 'vorheriger', 'vergangen', 'ehemaliger',
+  ],
+};
+
+// ============================================================================
 // PLAYBACK COMMAND PATTERNS
 // ============================================================================
 
@@ -272,4 +373,97 @@ export const PLAYBACK_COMMANDS: Record<string, string[]> = {
   previous: ['previous', 'précédent', 'anterior', 'vorheriger', 'back'],
   shuffle: ['shuffle', 'aléatoire', 'aleatorio', 'zufällig', 'mix'],
   repeat: ['repeat', 'répète', 'repetir', 'wiederholen', 'loop'],
+};
+
+// ============================================================================
+// ADDITIONAL COUNTRY MAPPINGS (Extended)
+// ============================================================================
+
+/**
+ * Additional country mappings to complement COUNTRY_MAPPINGS
+ * These are merged at runtime
+ */
+export const COUNTRY_MAPPINGS_EXTENDED: Record<string, string> = {
+  // Africa
+  'algeria': 'DZ', 'algérie': 'DZ', 'argelia': 'DZ', 'algerien': 'DZ',
+  'angola': 'AO',
+  'cameroon': 'CM', 'cameroun': 'CM', 'camerún': 'CM', 'kamerun': 'CM',
+  'ethiopia': 'ET', 'éthiopie': 'ET', 'etiopía': 'ET', 'äthiopien': 'ET',
+  'ghana': 'GH',
+  'ivory coast': 'CI', "côte d'ivoire": 'CI', 'costa de marfil': 'CI',
+  'libya': 'LY', 'libye': 'LY', 'libia': 'LY', 'libyen': 'LY',
+  'senegal': 'SN', 'sénégal': 'SN',
+  'sudan': 'SD', 'soudan': 'SD', 'sudán': 'SD',
+  'tanzania': 'TZ', 'tanzanie': 'TZ', 'tansania': 'TZ',
+  'tunisia': 'TN', 'tunisie': 'TN', 'túnez': 'TN', 'tunesien': 'TN',
+  'zambia': 'ZM', 'zambie': 'ZM', 'sambia': 'ZM',
+  'zimbabwe': 'ZW', 'simbabwe': 'ZW',
+  // Asia
+  'bangladesh': 'BD', 'bangladesch': 'BD',
+  'cambodia': 'KH', 'cambodge': 'KH', 'camboya': 'KH', 'kambodscha': 'KH',
+  'hong kong': 'HK', 'hongkong': 'HK',
+  'iran': 'IR',
+  'iraq': 'IQ', 'irak': 'IQ',
+  'kazakhstan': 'KZ', 'kasachstan': 'KZ',
+  'laos': 'LA',
+  'malaysia': 'MY', 'malaisie': 'MY', 'malasia': 'MY', 'malaysien': 'MY',
+  'mongolia': 'MN', 'mongolie': 'MN', 'mongolei': 'MN',
+  'myanmar': 'MM', 'birmanie': 'MM', 'birmania': 'MM',
+  'nepal': 'NP', 'népal': 'NP',
+  'north korea': 'KP', 'corée du nord': 'KP', 'corea del norte': 'KP', 'nordkorea': 'KP',
+  'pakistan': 'PK',
+  'philippines': 'PH', 'filipinas': 'PH', 'philippinen': 'PH',
+  'singapore': 'SG', 'singapour': 'SG', 'singapur': 'SG',
+  'sri lanka': 'LK',
+  'taiwan': 'TW', 'taïwan': 'TW', 'taiwán': 'TW',
+  'uzbekistan': 'UZ', 'ouzbékistan': 'UZ', 'uzbekistán': 'UZ', 'usbekistan': 'UZ',
+  // Europe
+  'belarus': 'BY', 'biélorussie': 'BY', 'bielorrusia': 'BY', 'weißrussland': 'BY',
+  'bosnia': 'BA', 'bosnie': 'BA', 'bosnien': 'BA',
+  'bulgaria': 'BG', 'bulgarie': 'BG', 'bulgarien': 'BG',
+  'croatia': 'HR', 'croatie': 'HR', 'croacia': 'HR', 'kroatien': 'HR',
+  'czech republic': 'CZ', 'république tchèque': 'CZ', 'república checa': 'CZ', 'tschechien': 'CZ',
+  'czechia': 'CZ', 'tchéquie': 'CZ', 'chequia': 'CZ',
+  'estonia': 'EE', 'estonie': 'EE', 'estonia': 'EE', 'estland': 'EE',
+  'hungary': 'HU', 'hongrie': 'HU', 'hungría': 'HU', 'ungarn': 'HU',
+  'iceland': 'IS', 'islande': 'IS', 'islandia': 'IS', 'island': 'IS',
+  'latvia': 'LV', 'lettonie': 'LV', 'letonia': 'LV', 'lettland': 'LV',
+  'lithuania': 'LT', 'lituanie': 'LT', 'lituania': 'LT', 'litauen': 'LT',
+  'luxembourg': 'LU', 'luxemburg': 'LU',
+  'moldova': 'MD', 'moldavie': 'MD', 'moldavia': 'MD', 'moldawien': 'MD',
+  'montenegro': 'ME', 'monténégro': 'ME',
+  'north macedonia': 'MK', 'macédoine du nord': 'MK', 'macedonia del norte': 'MK', 'nordmazedonien': 'MK',
+  'romania': 'RO', 'roumanie': 'RO', 'rumania': 'RO', 'rumänien': 'RO',
+  'serbia': 'RS', 'serbie': 'RS', 'serbien': 'RS',
+  'slovakia': 'SK', 'slovaquie': 'SK', 'eslovaquia': 'SK', 'slowakei': 'SK',
+  'slovenia': 'SI', 'slovénie': 'SI', 'eslovenia': 'SI', 'slowenien': 'SI',
+  // Americas
+  'chile': 'CL', 'chili': 'CL',
+  'costa rica': 'CR',
+  'cuba': 'CU', 'kuba': 'CU',
+  'dominican republic': 'DO', 'république dominicaine': 'DO', 'república dominicana': 'DO', 'dominikanische republik': 'DO',
+  'ecuador': 'EC', 'équateur': 'EC', 'ekuador': 'EC',
+  'guatemala': 'GT',
+  'jamaica': 'JM', 'jamaïque': 'JM', 'jamaika': 'JM',
+  'panama': 'PA', 'panamá': 'PA',
+  'paraguay': 'PY',
+  'peru': 'PE', 'pérou': 'PE', 'perú': 'PE',
+  'puerto rico': 'PR', 'porto rico': 'PR',
+  'uruguay': 'UY',
+  'venezuela': 'VE',
+  // Oceania
+  'fiji': 'FJ', 'fidji': 'FJ', 'fidschi': 'FJ',
+  'papua new guinea': 'PG', 'papouasie-nouvelle-guinée': 'PG', 'papúa nueva guinea': 'PG', 'papua-neuguinea': 'PG',
+  // Middle East
+  'bahrain': 'BH', 'bahreïn': 'BH', 'baréin': 'BH',
+  'jordan': 'JO', 'jordanie': 'JO', 'jordania': 'JO', 'jordanien': 'JO',
+  'kuwait': 'KW', 'koweït': 'KW', 'koweït': 'KW',
+  'lebanon': 'LB', 'liban': 'LB', 'líbano': 'LB', 'libanon': 'LB',
+  'oman': 'OM',
+  'qatar': 'QA', 'katar': 'QA',
+  'saudi arabia': 'SA', 'arabie saoudite': 'SA', 'arabia saudita': 'SA', 'saudi-arabien': 'SA',
+  'syria': 'SY', 'syrie': 'SY', 'siria': 'SY', 'syrien': 'SY',
+  'united arab emirates': 'AE', 'émirats arabes unis': 'AE', 'emiratos árabes unidos': 'AE', 'vereinigte arabische emirate': 'AE',
+  'uae': 'AE',
+  'yemen': 'YE', 'yémen': 'YE', 'jemen': 'YE',
 };

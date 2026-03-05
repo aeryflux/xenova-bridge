@@ -26,8 +26,13 @@ import {
   GENRE_PATTERNS,
   DIRECTION_PATTERNS,
   COUNTRY_MAPPINGS,
+  COUNTRY_MAPPINGS_EXTENDED,
+  TEMPORAL_PATTERNS,
   PLAYBACK_COMMANDS,
 } from '../models/patterns.js';
+
+// Merge country mappings at module load time
+const ALL_COUNTRY_MAPPINGS = { ...COUNTRY_MAPPINGS, ...COUNTRY_MAPPINGS_EXTENDED };
 import {
   normalizeText,
   tokenize,
@@ -69,6 +74,7 @@ export class EntityExtractor {
     entities.push(...this.extractLanguages(input, normalized));
     entities.push(...this.extractDirections(input, normalized));
     entities.push(...this.extractQuantities(input, normalized));
+    entities.push(...this.extractTemporal(input, normalized));
 
     // Filter by confidence threshold
     const filtered = entities.filter(
@@ -87,6 +93,7 @@ export class EntityExtractor {
 
   /**
    * Extract country entities
+   * Uses merged COUNTRY_MAPPINGS + COUNTRY_MAPPINGS_EXTENDED
    */
   private extractCountries(
     original: string,
@@ -97,7 +104,7 @@ export class EntityExtractor {
 
     // Check single tokens
     for (const token of tokens) {
-      const countryCode = COUNTRY_MAPPINGS[token];
+      const countryCode = ALL_COUNTRY_MAPPINGS[token];
       if (countryCode) {
         const position = findPatternPosition(normalized, token);
         if (position) {
@@ -113,7 +120,7 @@ export class EntityExtractor {
     }
 
     // Check multi-word country names
-    const multiWordCountries = Object.keys(COUNTRY_MAPPINGS).filter((k) =>
+    const multiWordCountries = Object.keys(ALL_COUNTRY_MAPPINGS).filter((k) =>
       k.includes(' ')
     );
     for (const countryName of multiWordCountries) {
@@ -124,7 +131,7 @@ export class EntityExtractor {
           entities.push({
             type: 'country',
             value: countryName,
-            normalizedValue: COUNTRY_MAPPINGS[countryName],
+            normalizedValue: ALL_COUNTRY_MAPPINGS[countryName],
             confidence: 0.95,
             position,
           });
@@ -322,6 +329,38 @@ export class EntityExtractor {
           confidence: 1.0,
           position,
         });
+      }
+    }
+
+    return entities;
+  }
+
+  /**
+   * Extract temporal entities (time-related expressions)
+   */
+  private extractTemporal(
+    original: string,
+    normalized: string
+  ): ExtractedEntity[] {
+    const entities: ExtractedEntity[] = [];
+
+    for (const [temporal, patterns] of Object.entries(TEMPORAL_PATTERNS)) {
+      for (const pattern of patterns) {
+        const normalizedPattern = normalizeText(pattern);
+        // Use word boundary matching to prevent false positives
+        if (containsWord(normalized, normalizedPattern)) {
+          const position = findPatternPosition(normalized, normalizedPattern);
+          if (position) {
+            entities.push({
+              type: 'temporal',
+              value: pattern,
+              normalizedValue: temporal,
+              confidence: 0.85,
+              position,
+            });
+            break; // Only one match per temporal category
+          }
+        }
       }
     }
 
