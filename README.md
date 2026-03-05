@@ -61,11 +61,13 @@ Xenova Bridge provides intent classification, entity extraction, and action disp
 ## Installation
 
 ```bash
-# From monorepo root
-npm install
+npm install @aeryflux/xenova-bridge
 ```
 
-The package is available as `@aeryflux/xenova-bridge` in the monorepo workspace.
+Peer dependency (optional):
+```bash
+npm install @xenova/transformers
+```
 
 ## Usage
 
@@ -287,11 +289,7 @@ function CommandBar() {
 ## Testing
 
 ```bash
-# Run tests
-npm test -w @aeryflux/xenova-bridge
-
-# With coverage
-npm test -w @aeryflux/xenova-bridge -- --coverage
+npm test
 ```
 
 ## Configuration
