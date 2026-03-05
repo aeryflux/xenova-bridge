@@ -424,7 +424,7 @@ export const COUNTRY_MAPPINGS_EXTENDED: Record<string, string> = {
   'croatia': 'HR', 'croatie': 'HR', 'croacia': 'HR', 'kroatien': 'HR',
   'czech republic': 'CZ', 'république tchèque': 'CZ', 'república checa': 'CZ', 'tschechien': 'CZ',
   'czechia': 'CZ', 'tchéquie': 'CZ', 'chequia': 'CZ',
-  'estonia': 'EE', 'estonie': 'EE', 'estonia': 'EE', 'estland': 'EE',
+  'estonia': 'EE', 'estonie': 'EE', 'estland': 'EE',
   'hungary': 'HU', 'hongrie': 'HU', 'hungría': 'HU', 'ungarn': 'HU',
   'iceland': 'IS', 'islande': 'IS', 'islandia': 'IS', 'island': 'IS',
   'latvia': 'LV', 'lettonie': 'LV', 'letonia': 'LV', 'lettland': 'LV',
@@ -457,7 +457,7 @@ export const COUNTRY_MAPPINGS_EXTENDED: Record<string, string> = {
   // Middle East
   'bahrain': 'BH', 'bahreïn': 'BH', 'baréin': 'BH',
   'jordan': 'JO', 'jordanie': 'JO', 'jordania': 'JO', 'jordanien': 'JO',
-  'kuwait': 'KW', 'koweït': 'KW', 'koweït': 'KW',
+  'kuwait': 'KW', 'koweït': 'KW',
   'lebanon': 'LB', 'liban': 'LB', 'líbano': 'LB', 'libanon': 'LB',
   'oman': 'OM',
   'qatar': 'QA', 'katar': 'QA',
