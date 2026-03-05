@@ -1,6 +1,6 @@
 {
   "name": "@aeryflux/xenova-bridge",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Natural language interface bridge between users and AeryFlux components",
   "author": "martinbaud",
   "license": "MIT",
