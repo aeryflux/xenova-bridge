@@ -62,7 +62,12 @@ export class IntentEngine {
     }
 
     // 3. Optional: Use embedding similarity for ambiguous cases
-    if (this.config.useLocalEmbeddings && patternResult.confidence < 0.4) {
+    // Skip embeddings for 'unknown' category (gibberish has nothing to refine)
+    if (
+      this.config.useLocalEmbeddings &&
+      patternResult.confidence < 0.4 &&
+      patternResult.category !== 'unknown'
+    ) {
       try {
         const embeddingResult = await this.classifyByEmbeddings(input);
         if (embeddingResult.confidence > patternResult.confidence) {
@@ -125,6 +130,14 @@ export class IntentEngine {
 
     // Normalize confidence to 0-1 range
     const confidence = Math.min(bestScore / 3, 1); // Max 3 matches = 100%
+
+    // If score is too low, force unknown (handles gibberish input)
+    if (bestScore < 0.1) {
+      return {
+        category: 'unknown',
+        confidence,
+      };
+    }
 
     // Extract sub-intent if applicable
     const subIntent = this.extractSubIntent(normalized, bestCategory);
