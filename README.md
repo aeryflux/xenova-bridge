@@ -1,5 +1,9 @@
 # @aeryflux/xenova-bridge
 
+[![npm version](https://img.shields.io/npm/v/@aeryflux/xenova-bridge.svg)](https://www.npmjs.com/package/@aeryflux/xenova-bridge)
+[![npm downloads](https://img.shields.io/npm/dm/@aeryflux/xenova-bridge.svg)](https://www.npmjs.com/package/@aeryflux/xenova-bridge)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
 Natural language interface bridge between users and AeryFlux components.
 
 ## Overview
