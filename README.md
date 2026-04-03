@@ -256,8 +256,8 @@ npm test
 |--------|------|---------|-------------|
 | `intentThreshold` | number | 0.6 | Minimum confidence for intent classification |
 | `entityThreshold` | number | 0.5 | Minimum confidence for entity extraction |
-| `useLocalEmbeddings` | boolean | true | Use Pythagoras embeddings API for ambiguous cases |
-| `apiBaseUrl` | string | 'http://localhost:3000' | Pythagoras API URL |
+| `useLocalEmbeddings` | boolean | true | Use local embeddings API for ambiguous cases |
+| `apiBaseUrl` | string | 'http://localhost:3000' | Backend API URL |
 | `debug` | boolean | false | Enable debug logging |
 
 ## Extending
