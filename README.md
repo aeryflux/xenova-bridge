@@ -290,6 +290,15 @@ function CommandBar() {
 }
 ```
 
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup, PR guidelines,
+and areas where help is welcome.
+
+## Changelog
+
+See [CHANGELOG.md](./CHANGELOG.md) for a detailed history of changes.
+
 ## Testing
 
 ```bash
@@ -332,4 +341,4 @@ COUNTRY_MAPPINGS['helvetia'] = 'CH';
 
 ## License
 
-MIT - AeryFlux
+MIT - AeryFlux. See [LICENSE](./LICENSE) for full text.
