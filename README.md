@@ -235,61 +235,6 @@ Entity extraction.
 | EN | "dark mode" | configure | theme:dark |
 | FR | "mode sombre" | configure | theme:dark |
 
-## Integration with Pythagoras API
-
-The package is exposed via Pythagoras API endpoints:
-
-```bash
-# Process full command
-POST /intent/process
-{
-  "input": "show weather in Japan",
-  "context": { "currentMode": "news", "currentTheme": "dark", "language": "en" }
-}
-
-# Classify intent only
-POST /intent/classify
-{
-  "input": "go to France"
-}
-
-# Extract entities only
-POST /intent/entities
-{
-  "input": "play jazz music in Germany"
-}
-
-# Get suggestions
-GET /intent/suggestions?mode=music&language=fr
-```
-
-## Integration with Atlas
-
-Use the `useXenovaCommand` hook in Atlas:
-
-```typescript
-import { useXenovaCommand } from '@/hooks/useXenovaCommand';
-
-function CommandBar() {
-  const { processCommand, isProcessing, lastResult } = useXenovaCommand();
-
-  const handleSubmit = async (input: string) => {
-    const result = await processCommand(input);
-    if (result.success) {
-      console.log('Actions executed:', result.actions);
-    }
-  };
-
-  return (
-    <TextInput
-      placeholder="Type a command..."
-      onSubmitEditing={(e) => handleSubmit(e.nativeEvent.text)}
-      editable={!isProcessing}
-    />
-  );
-}
-```
-
 ## Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup, PR guidelines,
