@@ -105,19 +105,42 @@ export const INTENT_PATTERNS: Record<IntentCategory, string[]> = {
  */
 export const MODE_PATTERNS: Record<ModeId, string[]> = {
   news: [
-    // English
+    // English — general
     'news', 'headlines', 'articles', 'breaking', 'latest news',
     'current events', 'report', 'happening', 'today', 'update',
     'what happened', 'crisis', 'conflict', 'election', 'politics',
-    // French
+    // French — general
     'actualités', 'nouvelles', 'titres', 'journal', 'info',
     'dernières nouvelles', 'événements', 'rapport', 'politique',
-    // Spanish
+    // Spanish — general
     'noticias', 'titulares', 'artículos', 'últimas noticias',
     'actualidad', 'informe', 'política',
-    // German
+    // German — general
     'nachrichten', 'schlagzeilen', 'artikel', 'neuigkeiten',
     'aktuell', 'bericht', 'politik',
+    // Sports disciplines (map to news mode)
+    'football', 'soccer', 'basketball', 'tennis', 'formula 1', 'formula one', 'f1',
+    'rugby', 'cricket', 'golf', 'boxing', 'mma', 'ufc', 'cycling', 'athletics',
+    'swimming', 'volleyball', 'handball', 'hockey', 'baseball',
+    'nfl', 'nba', 'nhl', 'mlb', 'super bowl', 'superbowl', 'olympics', 'olympic',
+    'premier league', 'champions league', 'ligue 1', 'la liga', 'bundesliga', 'serie a',
+    'world cup', 'wimbledon', 'roland garros', 'tour de france',
+    // French sports
+    'basket', 'formule 1', 'cyclisme', 'natation', 'ligue des champions',
+    'coupe du monde', 'jeux olympiques',
+    // Spanish sports
+    'fútbol', 'futbol', 'baloncesto', 'tenis', 'ciclismo', 'atletismo',
+    // German sports
+    'fußball', 'fussball', 'radsport', 'leichtathletik',
+    // Topics (science, tech, health…)
+    'science', 'technology', 'tech', 'health', 'climate', 'environment',
+    'economy', 'finance', 'space', 'nasa', 'crypto', 'bitcoin',
+    // French topics
+    'santé', 'sante', 'économie', 'economie', 'environnement', 'technologie', 'espace',
+    // Spanish topics
+    'salud', 'tecnología', 'tecnologia', 'medio ambiente',
+    // German topics
+    'gesundheit', 'wirtschaft', 'umwelt', 'weltraum',
   ],
   music: [
     // English
