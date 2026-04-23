@@ -91,31 +91,50 @@ export {
 
 // ─── detectMode ──────────────────────────────────────────────────────────────
 // Lightweight synchronous helper: returns the best ModeId for a given input
-// using MODE_PATTERNS scoring, or null if no mode scores above the threshold.
+// using MODE_PATTERNS scoring, with 'wiki' as universal fallback.
 // Use this to route UI actions (news feed, music player, weather map…) without
 // spinning up IntentEngine (which is heavier, async, verb-action oriented).
 //
+// Priority: news > weather > music > challenge > wiki (explicit) > wiki (fallback)
+// The wiki fallback enables any free-form keyword ("guerre de cent ans", "覇気",
+// "natural language processing") to resolve to a Wikipedia search.
+//
 // Example:
-//   detectMode('football')  → 'news'
-//   detectMode('play jazz') → 'music'
-//   detectMode('météo')     → 'weather'
-//   detectMode('xyz')       → null
+//   detectMode('football')         → 'news'
+//   detectMode('play jazz')        → 'music'
+//   detectMode('météo')            → 'weather'
+//   detectMode('guerre de cent ans') → 'wiki'  (fallback)
+//   detectMode('覇気')               → 'wiki'  (fallback)
+//   detectMode('')                 → null
 // ─────────────────────────────────────────────────────────────────────────────
 import { MODE_PATTERNS } from './models/patterns.js';
 import { normalizeText as _nt, tokenize as _tok, calculatePatternScore as _cps } from './utils/text.js';
 import type { ModeId } from './types.js';
 
+// Modes scored by patterns — wiki is handled separately as explicit + fallback
+const SCORED_MODES: ModeId[] = ['news', 'weather', 'music', 'challenge'];
+
 export function detectMode(input: string, threshold = 1): ModeId | null {
+  if (!input.trim()) return null;
   const normalized = _nt(input);
   const tokens = _tok(normalized);
   let bestMode: ModeId | null = null;
   let bestScore = 0;
-  for (const [mode, patterns] of Object.entries(MODE_PATTERNS) as [ModeId, string[]][]) {
+  for (const mode of SCORED_MODES) {
+    const patterns = MODE_PATTERNS[mode];
+    if (!patterns) continue;
     const score = _cps(normalized, tokens, patterns);
     if (score > bestScore) {
       bestScore = score;
       bestMode = mode;
     }
   }
-  return bestScore >= threshold ? bestMode : null;
+  // Explicit mode match above threshold
+  if (bestScore >= threshold) return bestMode;
+  // Explicit wiki pattern match (e.g. "wikipedia france", "what is quantum physics")
+  const wikiScore = _cps(normalized, tokens, MODE_PATTERNS.wiki ?? []);
+  if (wikiScore >= threshold) return 'wiki';
+  // Universal fallback: any non-trivial input → wiki search
+  if (input.trim().length >= 2) return 'wiki';
+  return null;
 }
