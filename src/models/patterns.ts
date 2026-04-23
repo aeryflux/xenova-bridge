@@ -477,6 +477,18 @@ export const COUNTRY_MAPPINGS_EXTENDED: Record<string, string> = {
   // Oceania
   'fiji': 'FJ', 'fidji': 'FJ', 'fidschi': 'FJ',
   'papua new guinea': 'PG', 'papouasie-nouvelle-guinée': 'PG', 'papúa nueva guinea': 'PG', 'papua-neuguinea': 'PG',
+  // Historical / alternate names (commonly found in encyclopedia articles)
+  'soviet union': 'RU', 'union sovietique': 'RU', 'urss': 'RU', 'ussr': 'RU',
+  'russian empire': 'RU', 'empire russe': 'RU',
+  'third reich': 'DE', 'nazi germany': 'DE', 'weimar republic': 'DE', 'allemagne nazie': 'DE',
+  'austro-hungarian empire': 'AT', 'austria-hungary': 'AT',
+  'ottoman empire': 'TR', 'empire ottoman': 'TR',
+  'british empire': 'GB', 'great britain': 'GB', 'grande-bretagne': 'GB',
+  'roman empire': 'IT', 'empire romain': 'IT',
+  'byzantine empire': 'GR',
+  'holy roman empire': 'DE',
+  'peoples republic of china': 'CN',
+  'german democratic republic': 'DE', 'west germany': 'DE', 'east germany': 'DE',
   // Middle East
   'bahrain': 'BH', 'bahreïn': 'BH', 'baréin': 'BH',
   'jordan': 'JO', 'jordanie': 'JO', 'jordania': 'JO', 'jordanien': 'JO',
