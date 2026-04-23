@@ -31,8 +31,16 @@ import {
   PLAYBACK_COMMANDS,
 } from '../models/patterns.js';
 
-// Merge country mappings at module load time
-const ALL_COUNTRY_MAPPINGS = { ...COUNTRY_MAPPINGS, ...COUNTRY_MAPPINGS_EXTENDED };
+// Merge and normalize country mappings at module load time.
+// Keys are normalized (lowercase, no diacritics) so that token lookups — which
+// also use normalized text — never miss accented variants like 'états-unis'.
+const _raw = { ...COUNTRY_MAPPINGS, ...COUNTRY_MAPPINGS_EXTENDED };
+const ALL_COUNTRY_MAPPINGS: Record<string, string> = {};
+for (const [key, value] of Object.entries(_raw)) {
+  ALL_COUNTRY_MAPPINGS[
+    key.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  ] = value;
+}
 import {
   normalizeText,
   tokenize,
@@ -119,19 +127,18 @@ export class EntityExtractor {
       }
     }
 
-    // Check multi-word country names
+    // Check multi-word country names (keys are already normalized)
     const multiWordCountries = Object.keys(ALL_COUNTRY_MAPPINGS).filter((k) =>
       k.includes(' ')
     );
-    for (const countryName of multiWordCountries) {
-      const normalizedCountry = normalizeText(countryName);
+    for (const normalizedCountry of multiWordCountries) {
       if (normalized.includes(normalizedCountry)) {
         const position = findPatternPosition(normalized, normalizedCountry);
         if (position) {
           entities.push({
             type: 'country',
-            value: countryName,
-            normalizedValue: ALL_COUNTRY_MAPPINGS[countryName],
+            value: normalizedCountry,
+            normalizedValue: ALL_COUNTRY_MAPPINGS[normalizedCountry],
             confidence: 0.95,
             position,
           });

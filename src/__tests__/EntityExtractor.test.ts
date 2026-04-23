@@ -58,6 +58,28 @@ describe('EntityExtractor', () => {
         expect(country).toBeDefined();
         expect(country?.normalizedValue).toBe('DE');
       });
+
+      it('should extract accented "États-Unis" as country US', () => {
+        // Regression: key 'états-unis' has diacritics, token lookup must normalize keys
+        const entities = extractor.extract('les États-Unis entrent en guerre');
+        const country = entities.find((e) => e.type === 'country');
+        expect(country).toBeDefined();
+        expect(country?.normalizedValue).toBe('US');
+      });
+
+      it('should extract "Union soviétique" as country RU', () => {
+        const entities = extractor.extract('Union soviétique en 1941');
+        const country = entities.find((e) => e.type === 'country');
+        expect(country).toBeDefined();
+        expect(country?.normalizedValue).toBe('RU');
+      });
+
+      it('should extract "Soviet Union" as country RU', () => {
+        const entities = extractor.extract('the Soviet Union joined the Allies');
+        const country = entities.find((e) => e.type === 'country');
+        expect(country).toBeDefined();
+        expect(country?.normalizedValue).toBe('RU');
+      });
     });
 
     // Mode extraction
